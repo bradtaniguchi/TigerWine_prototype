@@ -10,56 +10,39 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script src="betting.js"></script>
     </head>
     <body>
-    <script>
+     
         
-        // Person object constructer
-        function Person (name, money){
-            this.name = name;
-            this.money = money;
-        }
-        
-        var amountofplayers = 0;
-        var node1 = new Person("Wing", 5);
-        amountofplayers++;
-        var i=0;
-        // array to track how many times someone gets paid
-        var multiply = new Array(6);
-        for(i=0; i<6; i++) { 
-            multiply[i] = new Array(amountofplayers);
-        }
-      
-        // array to track which player placed money where
-        var stored = new Array(6);
-        for(i=0; i<6; i++) { 
-            stored[i] = new Array(amountofplayers);
-        }
-        
-        // array to list the sides of the dice
-        var animalsondice = [ "Rooster ", " Wine ", "Deer ", "Fish ", "Crab", "Shrimp"];
-        document.write("Total number of players signed on: \n");
-        document.write(node1.name);
-        
-    </script>
 
-    <p id="currentplayer"></p>
+        <div ng-app = "playerStatus" ng-controller = "myCtrl">
+            
+            <p type="text" ng-model="name">
+            <p type="text" ng-model="money">
+                <span ng-click="changeMoney()">Current Player: {{name + " has " + money + " credits "}}
+                (Click here to update the current player after betting)</span>
+                <br><br>
+                Choice
 
-    <div ng-app = "playerStatus" ng-controller = "myCtrl">
-        <p type="text" ng-model="name">
-        <p type="text" ng-model="money">
-            Current Player: {{name + " has "+ money + " credits "}}
-    </div>
-    <script>
-        var app = angular.module('playerStatus', []);
-        app.controller('myCtrl', function($scope) {
-            $scope.name = node1.name;
-            $scope.money = node1.money;
-        });
-        if(node1.money > 0){
-            document.write("Where do you want to make a bet?");
-        }
-    </script>        
-    
+                0: Rooster 1: Wine 2: Deer 3: Fish 4: Crab 5. Shrimp
+                <br>
+
+                <input id="betposition"> 
+                <button type="button" ng-click="promptuser()">Submit</button>
+                <br> {{chosenanimal}}
+
+                <br>
+                How much do you bet?
+                <br>
+
+
+                <input id="betamount">
+                <button type="button" ng-click="promptuser2()">Submit</button>
+                <br> {{bet}}
+
+
+
+        </div>
     </body>
 </html>
