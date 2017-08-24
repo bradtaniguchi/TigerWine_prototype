@@ -1,8 +1,18 @@
 {
-    "name": "TigerWine_prototype",
-    "version": "1.0.0",
-    "keywords": ["util", "functional", "server", "client", "browser"],
-    "author": "Vidget",
-    "contributors": [],
-    "dependencies": {}
+  "name": "TigerWine_prototype",
+  "version": "1.0.0",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": "Vidget",
+  "contributors": [],
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^4.5.0",
+    "eslint-config-google": "^0.9.1"
+  }
 }

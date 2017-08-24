@@ -1,37 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-var i, j, m; //looping using same variables is iffy
-var bankerfee = 0; // may not be used unless for statistical purposes
-var turn = 0; // the real game will recieve input from random order
-var sidebetID = 0; 
-var sidebetIDcount = 0;
-
-var sidebetArray = []; //this is going to be recreatd and expanded
-
-// array to track how many times someone gets paid
-var multiply = new Array(6);
-for (i = 0; i < 6; i++) {
-    multiply[i] = new Array(2);
-}
-
-// array to track which player placed money where
-var stored = new Array(6);
-for (i = 0; i < 6; i++) {
-    stored[i] = new Array(2);
-}
-
-//make store and multiply zero
-for (i = 0; i < 6; i++) {
-    for (j = 0; j < 2; j++) {
-        stored[i][j] = 0;
-        multiply[i][j] = 0;
-        //console.log(stored[i][j]);
-    }
-}
 
 var app = angular.module('playerStatus', []);
 app.controller('myCtrl', function ($scope) {
@@ -39,8 +5,7 @@ app.controller('myCtrl', function ($scope) {
     $scope.bet;
     $scope.chosenanimal;
     var amountofplayers = 0;
-    $scope.textfeed; //plan on printing the outcomes to the screen
-
+    
     var node = [0, 1, 2];
     var firstprompt = 0; // makes sure animal is chosen first
 
@@ -95,7 +60,6 @@ app.controller('myCtrl', function ($scope) {
             }
             if ($scope.name === "Banker") {
                 rollDice();
-                //console.log("node[f] has : "+node[f].money);
                 var f;
                 for (f = 0; f < 2; f++) {
                     node[f].money += (stored[0][f] * multiply[0][f]) + (stored[1][f] * multiply[1][f]) + (stored[2][f] * multiply[2][f]) + (stored[3][f] * multiply[3][f])
@@ -172,21 +136,4 @@ app.controller('myCtrl', function ($scope) {
         }
     }
     
-    //----------------Gonna side here--------------------------
-    
-    function SideBetMachine(sb, cutter, better, position, amount ){
-        this.name =  sb;
-        this.cutter = cutter;
-        this.better = better;
-        this.position = position;
-        this.amount = amount;
-    }
-
 });//end of controller
-
-
-
-
-
-
-
