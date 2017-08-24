@@ -4,10 +4,13 @@
  * and open the template in the editor.
  */
 
+var i, j, m; //looping using same variables is iffy
+var bankerfee = 0; // may not be used unless for statistical purposes
+var turn = 0; // the real game will recieve input from random order
+var sidebetID = 0; 
+var sidebetIDcount = 0;
 
-
-var i, j, m; //looping
-var bankerfee = 0;
+var sidebetArray = []; //this is going to be recreatd and expanded
 
 // array to track how many times someone gets paid
 var multiply = new Array(6);
@@ -21,7 +24,6 @@ for (i = 0; i < 6; i++) {
     stored[i] = new Array(2);
 }
 
-
 //make store and multiply zero
 for (i = 0; i < 6; i++) {
     for (j = 0; j < 2; j++) {
@@ -31,24 +33,13 @@ for (i = 0; i < 6; i++) {
     }
 }
 
-
-
-
-
-
-
-var turn = 0;
-var animalposition=0;
-
 var app = angular.module('playerStatus', []);
 app.controller('myCtrl', function ($scope) {
 
     $scope.bet;
     $scope.chosenanimal;
-    $scope.amountofplayers = 0;
-    $scope.i = 0; //increments for 'for' loops
-    $scope.textfeed;
-
+    var amountofplayers = 0;
+    $scope.textfeed; //plan on printing the outcomes to the screen
 
     var node = [0, 1, 2];
     var firstprompt = 0; // makes sure animal is chosen first
@@ -61,20 +52,21 @@ app.controller('myCtrl', function ($scope) {
 
     // player data
     node[0] = new Person("Wing", 5);
-    node[1] = new Person("Eric", 5);
+    node[1] = new Person("Eric", 4);
     node[2] = new Person("Banker", 0); //easy to calculate and keep track
     //for loops won't go up to the banker
 
     //scope variables 
     $scope.name = node[turn].name;
     $scope.money = node[turn].money;
-    $scope.amountofplayers++;
+    amountofplayers++; //Wing
+    amountofplayers++; //Eric
 
     $scope.promptuser = function () {
         var x, text;
         x = document.getElementById("betposition").value;
         animalposition = parseInt(x);
-        console.log("The typeof animalposition is: "+ typeof animalposition);
+        console.log("The typeof animalposition is: " + typeof animalposition);
         if (isNaN(x) || x < 0 || x > 5 || x === "") {
             text = "Error";
         } else {
@@ -96,20 +88,20 @@ app.controller('myCtrl', function ($scope) {
             $scope.money -= x;
             node[turn].money = $scope.money;
             firstprompt = 0;
-            if ($scope.money == 0 && $scope.name != "Banker") {
+            if ($scope.money === 0 && $scope.name !== "Banker") {
                 turn++;
                 $scope.name = node[turn].name;
                 $scope.money = node[turn].money;
             }
-            if ($scope.name == "Banker") {
+            if ($scope.name === "Banker") {
                 rollDice();
                 //console.log("node[f] has : "+node[f].money);
-                   var f;
-            for (f = 0; f < 2; f++) {
-                node[f].money += (stored[0][f] * multiply[0][f]) + (stored[1][f] * multiply[1][f]) + (stored[2][f] * multiply[2][f]) + (stored[3][f] * multiply[3][f])
-                        + (stored[4][f] * multiply[4][f]) + (stored[5][f] * multiply[5][f]);
-                console.log("node[f] has : "+node[f].money);
-            }
+                var f;
+                for (f = 0; f < 2; f++) {
+                    node[f].money += (stored[0][f] * multiply[0][f]) + (stored[1][f] * multiply[1][f]) + (stored[2][f] * multiply[2][f]) + (stored[3][f] * multiply[3][f])
+                            + (stored[4][f] * multiply[4][f]) + (stored[5][f] * multiply[5][f]);
+                    console.log("node[f] has : " + node[f].money);
+                }
             }
         }
         $scope.bet = (text + x);
@@ -117,12 +109,10 @@ app.controller('myCtrl', function ($scope) {
     }; //end of prompt2
     var dice = [5, 5, 5]; //dice could roll in the beginning of the game hehe
     var rollDice = function () {
-        
-
 
 //return money
         for (m = 0; m < 3; m++) {
-console.log("the dice is : "+dice[m]);
+            console.log("the dice is : " + dice[m]);
             switch (dice[1]) {
                 case 0:
                     returnMoney(m, 0);
@@ -145,45 +135,53 @@ console.log("the dice is : "+dice[m]);
                 default:
 
             }
-         
+
         }//end of for loop
-  }; // end of rollDice function
+    }; // end of rollDice function
 
-        function returnMoney(n, k) {
-            console.log("entered returnMoney function");
-            for (j = 0; j < 2; j++) {
-                multiply[k][j]++;
-                console.log("multiply array is type: "+typeof multiply[k][j] + multiply[k][j]);
-            }
-            if (n == 1) {
-                if (dice[n] != dice[0]) {
-                    allocateMoney(k);
-                }
-            } else if (n == 2) {
-                if ((dice[n] != dice[1]) && (dice[n] != dice[0])) {
-                    allocateMoney(k);
-                }
-            } else {
-                allocateMoney(k);
-
-console.log("*entered the else returMoney");
-            }
-
-        } // returnedMoney function ended
-
-        function allocateMoney(k) {
-            var z;
-            for (z = 0; z < 2; z++) {
-                //add money
-                console.log("stored[kz] has value: "+stored[k][z]);
-                node[z].money += stored[k][z];
-                bankerfee += stored[k][z];
-                console.log("the banker will pay : "+bankerfee);
-            }
-         
-
+    function returnMoney(n, k) {
+        console.log("entered returnMoney function");
+        for (j = 0; j < 2; j++) {
+            multiply[k][j]++;
+            console.log("multiply array is type: " + typeof multiply[k][j] + multiply[k][j]);
         }
-  
+        if (n === 1) {
+            if (dice[n] !== dice[0]) {
+                allocateMoney(k);
+            }
+        } else if (n === 2) {
+            if ((dice[n] !== dice[1]) && (dice[n] !== dice[0])) {
+                allocateMoney(k);
+            }
+        } else {
+            allocateMoney(k);
+
+            console.log("*entered the else returMoney");
+        }
+
+    } // returnedMoney function ended
+
+    function allocateMoney(k) {
+        var z;
+        for (z = 0; z < 2; z++) {
+            //add money
+            console.log("stored[kz] has value: " + stored[k][z]);
+            node[z].money += stored[k][z];
+            bankerfee += stored[k][z];
+            console.log("the banker will pay : " + bankerfee);
+        }
+    }
+    
+    //----------------Gonna side here--------------------------
+    
+    function SideBetMachine(sb, cutter, better, position, amount ){
+        this.name =  sb;
+        this.cutter = cutter;
+        this.better = better;
+        this.position = position;
+        this.amount = amount;
+    }
+
 });//end of controller
 
 
