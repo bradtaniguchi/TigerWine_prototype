@@ -5,7 +5,7 @@ app.controller('myCtrl', function ($scope) {
     $scope.bet;
     $scope.chosenanimal;
     var amountofplayers = 0;
-    
+
     var node = [0, 1, 2];
     var firstprompt = 0; // makes sure animal is chosen first
 
@@ -135,5 +135,5 @@ app.controller('myCtrl', function ($scope) {
             console.log("the banker will pay : " + bankerfee);
         }
     }
-    
+
 });//end of controller

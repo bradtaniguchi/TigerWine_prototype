@@ -3,7 +3,7 @@
 var i, j, m; //looping using same variables is iffy
 var bankerfee = 0; // may not be used unless for statistical purposes
 var turn = 0; // the real game will recieve input from random order
-var sidebetID = 0; 
+var sidebetID = 0;
 var sidebetIDcount = 0;
 
 var sidebetArray = []; //this is going to be recreatd and expanded
