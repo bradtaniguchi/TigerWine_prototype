@@ -31,7 +31,7 @@ app.controller('myCtrl', function ($scope) {
             stored[animalposition][turn] += parseInt(x);
             $scope.money -= x;
             node[turn].money = $scope.money;
-            //sidebetAvailableplayers();
+            sidebetAvailableplayers();
             firstprompt = 0;
             if ($scope.money === 0 && $scope.name !== "Banker") {
                 turn++;
@@ -51,8 +51,30 @@ app.controller('myCtrl', function ($scope) {
         $scope.bet = (text + x);
 
     }; //end of prompt2
-    
 
+
+    function sidebetAvailableplayers() {
+        availplayers = "";
+        var c, d, e;
+        var reoccur;
+        console.log("availplayers " + availplayers);
+
+        for (c = 0; c < 6; c++) {
+            for (d = 0; d < 2; d++) {
+                if (stored[c][d] > 0) {
+
+                    if (availplayers.includes(node[d].name)) {
+
+                    } else {
+                        availplayers += (node[d].name + " ");
+                    }
+
+
+                }
+            }
+        }
+        $scope.availableperson = availplayers;
+    }
 
 
 });//end of controller

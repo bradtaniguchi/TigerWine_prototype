@@ -12,7 +12,7 @@ var sidebetID = 0;
 var sidebetIDcount = 0;
 var sidebetArray = []; //this is going to be recreatd and expanded
 
-
+var availplayers;
 
 // 2D Arrays
 // array to track how many times someone gets paid
