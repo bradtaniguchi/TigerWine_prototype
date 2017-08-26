@@ -47,4 +47,4 @@ amountofplayers++; //Eric - ...
 var dice = [5, 5, 5]; //dice could roll in the beginning of the game hehe
 
 //angular.js    
-var app = angular.module('playerStatus', []);
+angular.module('playerStatus', []);

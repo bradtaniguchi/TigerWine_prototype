@@ -1,6 +1,6 @@
 
 
-app.controller('myCtrl', function ($scope) {
+angular.module('playerStatus').controller('myCtrl', function ($scope) {
 
     //scope variables 
     $scope.name = node[turn].name;
