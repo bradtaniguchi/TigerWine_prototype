@@ -15,78 +15,74 @@ and open the template in the editor.
         <script src="dicefunctions.js"></script>
         <script src="betting.js"></script>
 
-
     </head>
     <body >
-
 
         <h1>Bet</h1>
         <div ng-app = "playerStatus" ng-controller = "myCtrl">
 
-
             <span>Current Player: {{name + " has " + money + " credits "}}
             </span>
-            <br><br>
-            Choice
+            <br>
+            <br>
 
             0: Rooster 1: Wine 2: Deer 3: Fish 4: Crab 5. Shrimp
             <br>
 
             <input id="betposition"> 
             <button type="button" ng-click="promptuser()">Submit</button>
-            <br> {{chosenanimal}}
+            <br>
+            {{chosenanimal}}
 
             <br>
             How much do you bet?
             <br>
 
-
             <input id="betamount">
             <button type="button" ng-click="promptuser2()" >Submit</button>
-            <br> {{bet}}
-            <br>
+            <br> 
+            {{bet}}
 
-            <h2>-----------------------------------------------</h2>
-            <h3> Side Betting </h3>
-
+            <h2> Side Betting </h2>
 
             Who do you want to side bet?
             <br>
 
             Available Players: 
-
-
             {{availableperson}}
 
             <br>
             <input id="personchoice">
-            <button type="button" ng-click="chooseperson()">Submit</button>
-            <br> choice
-
+            <button type="button" ng-click="chooseplayer()">Submit</button>
+            <br> 
+            {{choice}} 
             <br>
 
             Available Positions For Chosen Player:
-            <br>availableposition + "  are available"
+            <br>
+            {{availableposition}} 
             <br>
             Which position do you choose?
             <br>
             <input id="positionchoice">
             <button type ="button" ng-click="chooseposition()">Submit</button>
-            <br> choice2
+            <br> 
+            {{choice2}}
             <br>
             How much do you want to extract?
             <br>
             <input id="sidebetamount">
             <button type="button" ng-click="promptuser3()" >Submit</button>
-            <br> bet
-
+            <br>
+            {{choice3}}
 
             <br>
             Where do you want to put the cash?
             <br>
             <input id="sidebetplace">
             <button type="button" ng-click="promptuser4()">Submit</button>
-            <br> chosenanimal
+            <br> {{choice4}}
         </div>
     </body>
 </html>
+
