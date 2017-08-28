@@ -9,7 +9,7 @@ app.controller('myCtrl', function ($scope) {
         var x, text;
         x = document.getElementById("betposition").value;
         animalposition = parseInt(x);
-        console.log("The typeof animalposition is: " + typeof animalposition);
+
         if (isNaN(x) || x < 0 || x > 5 || x === "") {
             text = "Error";
         } else {
@@ -146,8 +146,13 @@ app.controller('myCtrl', function ($scope) {
                 text = "Error too high";
             } else {
                 extractedflag = 1;
+                //substract extracted amount
+                stored[validposchoice][chosenplayer] -= extractedamount;
                 text = "Extracted: " + extractedamount;
-
+                //create sidebetobject to keep track of dues
+                console.log(sidebetIDcount + " " + node[turn].id + " " + chosenplayer + " " + " " + validposchoice + " " + extractedamount)
+                sidebetArray[sidebetIDcount] = new SideBetMachine(sidebetIDcount, node[turn].id, chosenplayer, validposchoice, extractedamount);
+                sidebetIDcount++;
             }
             $scope.choice3 = text;
         }//end of if statement
@@ -158,7 +163,7 @@ app.controller('myCtrl', function ($scope) {
 
         if (extractedflag === 1) {
             x = document.getElementById("sidebetplace").value;
-            
+
             sidebetdeposit = parseInt(x);
 
             if (isNaN(x) || x < 0 || x > 5 || x === "") {

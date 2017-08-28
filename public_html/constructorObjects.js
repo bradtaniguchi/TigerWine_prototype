@@ -6,7 +6,7 @@ function Person(name, money, id) {
 }
 
 function SideBetMachine(id, cutter, better, position, amount) {
-    this.id = id; 
+    this.id = id;
     this.cutter = cutter;
     this.better = better;
     this.position = position;

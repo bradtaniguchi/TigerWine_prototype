@@ -8,9 +8,8 @@ var firstprompt = 0; // makes sure animal is chosen first
 var amountofplayers = 0;
 
 // sidebet prototype
-var sidebetID = 0;
 var sidebetIDcount = 0;
-var sidebetArray = []; //this is going to be recreatd and expanded
+var sidebetArray = new Array(5); //this is going to be recreatd and expanded
 
 var availplayers;
 var chosenplayer; //used as a flag

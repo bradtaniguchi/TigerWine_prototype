@@ -28,6 +28,9 @@ var rollDice = function () {
         }
 
     }//end of for loop
+
+    sideBettingfinale();
+
 }; // end of rollDice function
 
 function returnMoney(n, k) {
@@ -35,7 +38,7 @@ function returnMoney(n, k) {
     console.log("entered returnMoney function");
     for (j = 0; j < 2; j++) {
         multiply[k][j]++;
-        console.log("multiply array is type: " + typeof multiply[k][j] + multiply[k][j]);
+
     }
     if (n === 1) {
         if (dice[n] !== dice[0]) {
@@ -51,6 +54,8 @@ function returnMoney(n, k) {
         console.log("*entered the else returMoney");
     }
 
+
+
 } // returnedMoney function ended
 
 function allocateMoney(k) {
@@ -64,4 +69,35 @@ function allocateMoney(k) {
     }
 }
 
+function sideBettingfinale() {
+    var count = 0, r, temp, temp2;
+
+    while (count < sidebetIDcount) {
+        for (i = 0, r = 0; i < 3; i++) {
+            temp = sidebetArray[count].better;
+            temp2 = sidebetArray[count].cutter;
+
+            console.log("sidebetIDcount is " + sidebetIDcount);
+            console.log("sidebetArray[c].pos: " + sidebetArray[count].position);
+            console.log("dice[i]: " + dice[i]);
+            console.log("node[sbA[c].better] " + node[temp].money);
+            console.log("node[sbA[c].cutter] " + node[temp2].money);
+            console.log("sidebetArray[c].ext: " + sidebetArray[count].amount);
+
+
+            if (sidebetArray[count].position == dice[i]) {
+                node[temp].money += sidebetArray[count].amount;
+                node[temp2].money -= sidebetArray[count].amount;
+                r++;
+                if (r === 1) {
+                    node[temp].money += sidebetArray[count].amount;
+                    node[sidebetArray[count].cutter].money -= sidebetArray[count].amount;
+                }
+            }
+        }
+        count++;
+    }
+
+}
+;
 
