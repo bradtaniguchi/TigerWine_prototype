@@ -12,8 +12,10 @@ app.controller('myCtrl', function ($scope) {
 
         if (isNaN($scope.chosenanimal) || $scope.chosenanimal < 0 || $scope.chosenanimal > 5 || $scope.chosenanimal === "") {
             $scope.chosenanimal = "Error";
+
         } else {
             firstprompt = 1;
+
         }
     };
 
@@ -23,7 +25,7 @@ app.controller('myCtrl', function ($scope) {
         $scope.bet = parseInt($scope.bet);
 
         if (isNaN($scope.bet) || $scope.bet < 0 || $scope.bet > $scope.money || $scope.bet === "" || firstprompt === 0) {
-            $scope.bet = "Error";
+            $scope.bet = "Error p2";
         } else {
 
             stored[$scope.chosenanimal][turn] += $scope.bet;
@@ -42,8 +44,9 @@ app.controller('myCtrl', function ($scope) {
                 rollDice();
                 var f;
                 for (f = 0; f < 2; f++) {
-                    node[f].money += (stored[0][f] * multiply[0][f]) + (stored[1][f] * multiply[1][f]) + (stored[2][f] * multiply[2][f]) + (stored[3][f] * multiply[3][f])
-                            + (stored[4][f] * multiply[4][f]) + (stored[5][f] * multiply[5][f]);
+                    for (i = 0; i < 6; i++) {
+                        node[f].money += (stored[i][f] * multiply[i][f]);
+                    }
                     console.log("node[" + f + "] has : " + node[f].money);
                 }
             }
@@ -117,7 +120,7 @@ app.controller('myCtrl', function ($scope) {
 
 
 
-        
+
         console.log("positionchoice: " + $scope.choice2 + " and listthepositions is: " + $scope.availableposition);
         if ($scope.availableposition.includes($scope.choice2))//the includes may not work for a large list of persons
         {

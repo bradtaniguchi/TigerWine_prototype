@@ -31,18 +31,18 @@ and open the template in the editor.
             <br>
 
             <input ng-model="chosenanimal">
-            
-            <button type="button" ng-click="promptuser()">Submit</button>
+
+
             <br>
             {{chosenanimal}}
-            
+
 
             <br>
             How much do you bet?
             <br>
 
             <input ng-model="bet">
-            <button type="button" ng-click="promptuser2()" >Submit</button>
+            <button type="button" ng-click="promptuser();promptuser2()" >Submit</button>
             <br> 
             {{bet}}
 
@@ -68,14 +68,14 @@ and open the template in the editor.
             Which position do you choose?
             <br>
             <input ng-model="choice2">
-            <button type ="button" ng-click="chooseposition()">Submit</button>
+
             <br> 
             {{choice2}}
             <br>
             How much do you want to extract?
             <br>
             <input ng-model="choice3">
-            <button type="button" ng-click="promptuser3()" >Submit</button>
+
             <br>
             {{choice3}}
 
@@ -83,7 +83,7 @@ and open the template in the editor.
             Where do you want to put the cash?
             <br>
             <input ng-model="choice4">
-            <button type="button" ng-click="promptuser4()">Submit</button>
+            <button type="button" ng-click="chooseposition();promptuser3();promptuser4()">Submit</button>
             <br> {{choice4}}
         </div>
     </body>
