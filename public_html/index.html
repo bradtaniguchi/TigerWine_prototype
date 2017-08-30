@@ -9,77 +9,77 @@ and open the template in the editor.
         <title>TigerWine</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     </head>
     <body >
 
-
-        <h1>Bet</h1>
+        <b>(When Banker appears look in the console to see result)</b>
+        <h2>Bet</h2>
         <div ng-app = "playerStatus" ng-controller = "myCtrl">
-
 
             <span>Current Player: {{name + " has " + money + " credits "}}
             </span>
-            <br><br>
-            Choice
+            <br>
+            <br>
 
             0: Rooster 1: Wine 2: Deer 3: Fish 4: Crab 5. Shrimp
             <br>
 
-            <input id="betposition"> 
-            <button type="button" ng-click="promptuser()">Submit</button>
-            <br> {{chosenanimal}}
+            <input ng-model="chosenanimal">
+
+
+            <br>
+            {{chosenanimal}}
+
 
             <br>
             How much do you bet?
             <br>
 
+            <input ng-model="bet">
+            <button type="button" ng-click="promptuser();promptuser2()" >Submit</button>
+            <br> 
+            {{bet}}
 
-            <input id="betamount">
-            <button type="button" ng-click="promptuser2()" >Submit</button>
-            <br> {{bet}}
-            <br>
-
-            <h2>-----------------------------------------------</h2>
-            <h3> Side Betting </h3>
-
+            <h2> Side Betting </h2>
 
             Who do you want to side bet?
             <br>
 
             Available Players: 
-
-
             {{availableperson}}
 
             <br>
-            <input id="personchoice">
-            <button type="button" ng-click="chooseperson()">Submit</button>
-            <br> choice
-
+            <input ng-model="choice">
+            <button type="button" ng-click="chooseplayer()">Submit</button>
+            <br> 
+            {{choice}} 
             <br>
 
             Available Positions For Chosen Player:
-            <br>availableposition + "  are available"
+            <br>
+            {{availableposition}} 
             <br>
             Which position do you choose?
             <br>
-            <input id="positionchoice">
-            <button type ="button" ng-click="chooseposition()">Submit</button>
-            <br> choice2
+            <input ng-model="choice2">
+
+            <br> 
+            {{choice2}}
             <br>
             How much do you want to extract?
             <br>
-            <input id="sidebetamount">
-            <button type="button" ng-click="promptuser3()" >Submit</button>
-            <br> bet
+            <input ng-model="choice3">
 
+            <br>
+            {{choice3}}
 
             <br>
             Where do you want to put the cash?
             <br>
-            <input id="sidebetplace">
-            <button type="button" ng-click="promptuser4()">Submit</button>
-            <br> chosenanimal
+            <input ng-model="choice4">
+            <button type="button" ng-click="chooseposition();promptuser3();promptuser4()">Submit</button>
+            <br> {{choice4}}
         </div>
         <!--put scripts on the bottom of the page, always-->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
@@ -89,3 +89,4 @@ and open the template in the editor.
         <script src="betting.js"></script>
     </body>
 </html>
+
