@@ -13,10 +13,9 @@ var sidebetArray = new Array(5); //this is going to be recreatd and expanded
 
 var availplayers;
 var chosenplayer; //used as a flag
-var listthepositions = "";
 
 var validposchoice = -1; //used as a flag
-var availplayercount = 0;//this aligns with player object position ex: 0 is Wing and 1 is Eric
+var availplayerindex = 0;//this aligns with player object position ex: 0 is Wing and 1 is Eric
 var extractedamount = 0;
 var extractedflag = 0;
 var sidebetdeposit = 0;

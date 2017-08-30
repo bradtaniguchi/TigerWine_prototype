@@ -5,34 +5,34 @@ app.controller('myCtrl', function ($scope) {
     $scope.name = node[turn].name;
     $scope.money = node[turn].money;
 
+    //where the user wants to bet
     $scope.promptuser = function () {
-        var x, text;
-        x = document.getElementById("betposition").value;
-        animalposition = parseInt(x);
 
-        if (isNaN(x) || x < 0 || x > 5 || x === "") {
-            text = "Error";
+        $scope.chosenanimal = parseInt($scope.chosenanimal);
+
+        if (isNaN($scope.chosenanimal) || $scope.chosenanimal < 0 || $scope.chosenanimal > 5 || $scope.chosenanimal === "") {
+            $scope.chosenanimal = "Error";
         } else {
-            text = "Choice: ";
             firstprompt = 1;
         }
-        $scope.chosenanimal = (text + x);
     };
 
     //copy and pasted code, will attend to later
     $scope.promptuser2 = function () {
-        var x, text;
-        x = document.getElementById("betamount").value;
 
-        if (isNaN(x) || x < 0 || x > $scope.money || x === "" || firstprompt === 0) {
-            text = "Error";
+        $scope.bet = parseInt($scope.bet);
+
+        if (isNaN($scope.bet) || $scope.bet < 0 || $scope.bet > $scope.money || $scope.bet === "" || firstprompt === 0) {
+            $scope.bet = "Error";
         } else {
-            text = "Choice: ";
-            stored[animalposition][turn] += parseInt(x);
-            $scope.money -= x;
+
+            stored[$scope.chosenanimal][turn] += $scope.bet;
+            $scope.money -= $scope.bet;
             node[turn].money = $scope.money;
             sidebetAvailableplayers();
             firstprompt = 0;
+            $scope.bet = ""; //clear input fields
+            $scope.chosenanimal = ""; //clear input fields
             if ($scope.money === 0 && $scope.name !== "Banker") {
                 turn++;
                 $scope.name = node[turn].name;
@@ -44,18 +44,17 @@ app.controller('myCtrl', function ($scope) {
                 for (f = 0; f < 2; f++) {
                     node[f].money += (stored[0][f] * multiply[0][f]) + (stored[1][f] * multiply[1][f]) + (stored[2][f] * multiply[2][f]) + (stored[3][f] * multiply[3][f])
                             + (stored[4][f] * multiply[4][f]) + (stored[5][f] * multiply[5][f]);
-                    console.log("node[f] has : " + node[f].money);
+                    console.log("node[" + f + "] has : " + node[f].money);
                 }
             }
         }
-        $scope.bet = (text + x);
+
 
     }; //end of prompt2
 
     function sidebetAvailableplayers() {
         availplayers = "";
-        var c, d;
-        console.log("availplayers " + availplayers);
+        var c, d; // for the loops below
 
         for (c = 0; c < 6; c++) {
             for (d = 0; d < 2; d++) {
@@ -78,98 +77,97 @@ app.controller('myCtrl', function ($scope) {
 
     $scope.chooseplayer = function () {
 
-        var x, text, j;
-        x = document.getElementById("personchoice").value;
+        var j;
+        $scope.availableposition = "";
 
         if (availplayers !== "") {
 
-            if (availplayers.includes(x)) {
+            if (availplayers.includes($scope.choice)) {
                 for (i = 0; i < 2; i++) {
-                    if (x === node[i].name) {
-                        availplayercount = node[i].id;
-                        chosenplayer = availplayercount; //used as a flag
+                    if ($scope.choice === node[i].name) {
+                        availplayerindex = node[i].id;
+                        chosenplayer = availplayerindex; //used as a flag
                     }
                 }  // use id of player
 
-                availplayercount = availplayercount + " " + x;
-                text = availplayercount;
+                availplayerindex = availplayerindex + " " + $scope.choice;
+                $scope.choice = availplayerindex;
                 //since proper player was chosen display which positions are available
                 for (i = 0; i < 6; i++) {
                     for (j = 0; j < amountofplayers; j++) {
                         if (stored[i][j] > 0) {
-                            listthepositions += " " + i;
+                            $scope.availableposition += " " + i;
+                            //will show the available positions for the chosen person
                         }
                     }
                 }
 
             } else {
                 chosenplayer = null; //used as a flag
-                text = "Error ";
+                $scope.choice = "Error ";
             }
 
-            $scope.choice = text;
-            $scope.availableposition = listthepositions; //will show the available positions for the chosen person
+
+
         }
     };
 
     //make sure that the position was offered from above to proceed
     $scope.chooseposition = function () {
 
-        var x, text;
-        x = document.getElementById("positionchoice").value
-        console.log("choosepositionentered");
-        console.log("positionchoice: " + x + " and listthepositions is: " + listthepositions);
-        if (listthepositions.includes(x))//the includes may not work for a large list of persons
+
+
+        
+        console.log("positionchoice: " + $scope.choice2 + " and listthepositions is: " + $scope.availableposition);
+        if ($scope.availableposition.includes($scope.choice2))//the includes may not work for a large list of persons
         {
-            validposchoice = x; //will be used as a flag
-            text = x;
+            validposchoice = $scope.choice2; //will be used as a flag
+
 
         } else {
             validposchoice = -1; //will used as a flag
-            text = "Error ";
+            $scope.choice2 = "Error ";
         }
 
-        $scope.choice2 = text;
+
 
     };
 
     $scope.promptuser3 = function () {
-        var x, text;
-        if (validposchoice !== -1 && chosenplayer !== null) {
-            x = document.getElementById("sidebetamount").value;
 
-            extractedamount = parseInt(x);
+        if (validposchoice !== -1 && chosenplayer !== null) {
+
+
+            extractedamount = parseInt($scope.choice3);
             console.log("vpc: " + validposchoice + " cp: " + chosenplayer);
             console.log("stored[vpc][cp] = " + stored[validposchoice][chosenplayer]);
-            if (isNaN(x) || x < 0 || x > stored[validposchoice][chosenplayer] || x === "") {
+            if (isNaN($scope.choice3) || $scope.choice3 < 0 || $scope.choice3 > stored[validposchoice][chosenplayer] || $scope.choice3 === "") {
                 extractedflag = 0;
-                text = "Error too high";
+                $scope.choice3 = "Error too high";
             } else {
                 extractedflag = 1;
                 //substract extracted amount
                 stored[validposchoice][chosenplayer] -= extractedamount;
-                text = "Extracted: " + extractedamount;
+                $scope.choice3 = "Extracted: " + extractedamount;
                 //create sidebetobject to keep track of dues
                 console.log(sidebetIDcount + " " + node[turn].id + " " + chosenplayer + " " + " " + validposchoice + " " + extractedamount)
                 sidebetArray[sidebetIDcount] = new SideBetMachine(sidebetIDcount, node[turn].id, chosenplayer, validposchoice, extractedamount);
                 sidebetIDcount++;
             }
-            $scope.choice3 = text;
+
         }//end of if statement
     };
 
     $scope.promptuser4 = function () {
-        var x, text;
 
         if (extractedflag === 1) {
-            x = document.getElementById("sidebetplace").value;
 
-            sidebetdeposit = parseInt(x);
+            sidebetdeposit = parseInt($scope.choice4);
 
-            if (isNaN(x) || x < 0 || x > 5 || x === "") {
-                text = "Error";
+            if (isNaN($scope.choice4) || $scope.choice4 < 0 || $scope.choice4 > 5 || $scope.choice4 === "") {
+                $scope.choice4 = "Error";
             } else {
-                text = "Choice: " + sidebetdeposit;
+                $scope.choice4 = "Choice: " + sidebetdeposit;
                 stored[sidebetdeposit][turn] = extractedamount;
                 //false all flags
                 extractedflag = 0;
@@ -180,6 +178,7 @@ app.controller('myCtrl', function ($scope) {
                 $scope.choice3 = "";
                 $scope.choice = "";
                 $scope.availableposition = "";
+                $scope.choice4 = "";
             }
 
         }
