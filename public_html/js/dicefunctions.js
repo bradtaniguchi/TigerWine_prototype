@@ -1,8 +1,13 @@
 
 angular.module()
 .factory('DiceService', function() {
+  // reference the functions as an object(the DiceService object) and return it
+  // So we can use this object, and its functions, elsewhere in the project
   return {
-    rollDice: rollDice
+    rollDice: rollDice,
+    returnMoney: returnMoney,
+    allocateMoney: allocateMoney,
+    sideBettingfinale: sideBettingfinale
   };
   /**
    * Roles the dice

@@ -1,9 +1,21 @@
 
 
 angular.module('playerStatus').controller('myCtrl', function ($scope) {
+  var i; //looping using same variables is iffy
+  var turn = 0; // the real game will recieve input from random order
+  var firstprompt = 0; // makes sure animal is chosen first
+  var players = []; // array of players
+  var chosenplayer = 0;
+  var validposchoice = -1;
+
+
+  // sidebet prototype
+  var sidebetIDcount = 0;
+  var sidebetArray = new Array(5); //this is going to be recreatd and expanded
   //scope variables 
   $scope.name = node[turn].name;
   $scope.money = node[turn].money;
+
 
   //where the user wants to bet
   $scope.promptuser = function () {
@@ -81,6 +93,7 @@ angular.module('playerStatus').controller('myCtrl', function ($scope) {
   $scope.chooseplayer = function () {
 
       var j;
+      var availplayerindex = -1;
       $scope.availableposition = "";
 
       if (availplayers !== "") {

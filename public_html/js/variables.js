@@ -1,20 +1,5 @@
 
 
-//traffics gameplay
-var i; //looping using same variables is iffy
-var turn = 0; // the real game will recieve input from random order
-var firstprompt = 0; // makes sure animal is chosen first
-var amountofplayers = 0;
-
-// sidebet prototype
-var sidebetIDcount = 0;
-var sidebetArray = new Array(5); //this is going to be recreatd and expanded
-
-var availplayers;
-var chosenplayer; //used as a flag
-
-var validposchoice = -1; //used as a flag
-var availplayerindex = 0;//this aligns with player object position ex: 0 is Wing and 1 is Eric
 var extractedamount = 0;
 var extractedflag = 0;
 var sidebetdeposit = 0;
