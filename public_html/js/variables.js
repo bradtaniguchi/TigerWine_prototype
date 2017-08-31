@@ -2,7 +2,6 @@
 
 //traffics gameplay
 var i; //looping using same variables is iffy
-var bankerfee = 0; // may not be used unless for statistical purposes
 var turn = 0; // the real game will recieve input from random order
 var firstprompt = 0; // makes sure animal is chosen first
 var amountofplayers = 0;
