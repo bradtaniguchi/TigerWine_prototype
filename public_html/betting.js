@@ -8,7 +8,7 @@ angular.module('playerStatus').controller('myCtrl', function ($scope) {
     $scope.money = node[turn].money;
 
     //where the user wants to bet
-    $scope.promptuser = function () {
+    $scope.betwhere = function () {
 
         $scope.chosenanimal = parseInt($scope.chosenanimal);
 
@@ -21,19 +21,18 @@ angular.module('playerStatus').controller('myCtrl', function ($scope) {
         }
     };
 
-    //copy and pasted code, will attend to later
-    $scope.promptuser2 = function () {
+    $scope.howmuch = function () {
 
         $scope.bet = parseInt($scope.bet);
 
         if (isNaN($scope.bet) || $scope.bet < 0 || $scope.bet > $scope.money || $scope.bet === "" || firstprompt === 0) {
-            $scope.bet = "Error p2";
+            $scope.bet = "Error";
         } else {
 
             stored[$scope.chosenanimal][turn] += $scope.bet;
             $scope.money -= $scope.bet;
             node[turn].money = $scope.money;
-            sidebetAvailableplayers();
+            showavailablesidebets();
             firstprompt = 0;
             $scope.bet = ""; //clear input fields
             $scope.chosenanimal = ""; //clear input fields
@@ -57,7 +56,8 @@ angular.module('playerStatus').controller('myCtrl', function ($scope) {
 
     }; //end of prompt2
 
-    function sidebetAvailableplayers() {
+    //called from within $scope.howmuch function
+    function showavailablesidebets() {
         availplayers = "";
         var c, d; // for the loops below
 
@@ -80,7 +80,7 @@ angular.module('playerStatus').controller('myCtrl', function ($scope) {
 
     }
 
-    $scope.chooseplayer = function () {
+    $scope.choosebetter = function () {
 
         var j;
         $scope.availableposition = "";
@@ -117,8 +117,8 @@ angular.module('playerStatus').controller('myCtrl', function ($scope) {
         }
     };
 
-    //make sure that the position was offered from above to proceed
-    $scope.chooseposition = function () {
+    
+    $scope.choosehisposition = function () {
 
 
 
@@ -138,7 +138,7 @@ angular.module('playerStatus').controller('myCtrl', function ($scope) {
 
     };
 
-    $scope.promptuser3 = function () {
+    $scope.extractsidebet = function () {
 
         if (validposchoice !== -1 && chosenplayer !== null) {
 
@@ -163,26 +163,26 @@ angular.module('playerStatus').controller('myCtrl', function ($scope) {
         }//end of if statement
     };
 
-    $scope.promptuser4 = function () {
+    $scope.relocatesidebet = function () {
 
         if (extractedflag === 1) {
 
-            sidebetdeposit = parseInt($scope.choice4);
+            $scope.choice4 = parseInt($scope.choice4);
 
             if (isNaN($scope.choice4) || $scope.choice4 < 0 || $scope.choice4 > 5 || $scope.choice4 === "") {
                 $scope.choice4 = "Error";
             } else {
-                $scope.choice4 = "Choice: " + sidebetdeposit;
-                stored[sidebetdeposit][turn] = extractedamount;
-                //false all flags
+
+                stored[$scope.choice4][turn] = extractedamount;
+
+                //false all flags and clear all user inputs
                 extractedflag = 0;
-                validposchoice = -1;
+                validposchoice = -1; //is -1 because 0 is a valid position
                 chosenplayer = null;
                 $scope.availablepostions = "";
+                $scope.choice = "";
                 $scope.choice2 = "";
                 $scope.choice3 = "";
-                $scope.choice = "";
-                $scope.availableposition = "";
                 $scope.choice4 = "";
             }
 
