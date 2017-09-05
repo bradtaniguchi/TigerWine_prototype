@@ -25,19 +25,17 @@ and open the template in the editor.
             0: Rooster 1: Wine 2: Deer 3: Fish 4: Crab 5. Shrimp
             <br>
 
-            <input ng-model="chosenanimal">
-
+            <input ng-model="chosenanimal" type="number">
 
             <br>
             {{chosenanimal}}
-
 
             <br>
             How much do you bet?
             <br>
 
-            <input ng-model="bet">
-            <button type="button" ng-click="promptuser();promptuser2()" >Submit</button>
+            <input ng-model="bet" type="number">
+            <button type="button" ng-click="betwhere();howmuch()" >Submit</button>
             <br> 
             {{bet}}
 
@@ -50,8 +48,8 @@ and open the template in the editor.
             {{availableperson}}
 
             <br>
-            <input ng-model="choice">
-            <button type="button" ng-click="chooseplayer()">Submit</button>
+            <input ng-model="choice" type="number">
+            <button type="button" ng-click="choosebetter()">Submit</button>
             <br> 
             {{choice}} 
             <br>
@@ -62,14 +60,14 @@ and open the template in the editor.
             <br>
             Which position do you choose?
             <br>
-            <input ng-model="choice2">
+            <input ng-model="choice2" type="number">
 
             <br> 
             {{choice2}}
             <br>
             How much do you want to extract?
             <br>
-            <input ng-model="choice3">
+            <input ng-model="choice3" type="number">
 
             <br>
             {{choice3}}
@@ -77,9 +75,10 @@ and open the template in the editor.
             <br>
             Where do you want to put the cash?
             <br>
-            <input ng-model="choice4">
-            <button type="button" ng-click="chooseposition();promptuser3();promptuser4()">Submit</button>
-            <br> {{choice4}}
+            <input ng-model="choice4" type="number">
+            <button type="button" ng-click="choosehisposition();extractsidebet();relocatesidebet()">Submit</button>
+            <br> 
+            {{choice4}}
         </div>
         <!--put scripts on the bottom of the page, always-->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
